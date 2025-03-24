@@ -8,17 +8,17 @@ struct Node {
   struct Node* next;
 };
 
+// print list in format "[1; 2; 3]""
 void print_list(struct Node* head_ptr){
-    int index = 0;
-    while(true){
-        printf("%d\n", head_ptr->data);
+    printf("[");
+    while(head_ptr != NULL){
+        printf("%d", head_ptr->data);
         head_ptr = head_ptr->next;
-        index++;
-        if (head_ptr == NULL){
-            break;
+        if (head_ptr != NULL){
+             printf("; ");
         }
     }
-    printf("Linked list traverse is complete");
+    printf("]");
 }
 
 int main()
