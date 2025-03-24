@@ -65,6 +65,12 @@ void free_list(struct Node* head_ptr){
 
 // Get value by index
 int get_by_index(const struct Node* head_ptr, int get_index){
+    // Non negative index check
+    if (get_index < 0){
+        fprintf(stderr, "Index cannot be negative: %d\n", get_index);
+        return 0;
+    }
+
     for (int idx = 0; idx < get_index; idx++){
         head_ptr = head_ptr->next;
         if (head_ptr == NULL){
@@ -78,6 +84,12 @@ int get_by_index(const struct Node* head_ptr, int get_index){
 
 // Get value by index - bound safe version
 bool get_by_index_safe(const struct Node* head_ptr, int get_index, int* value){
+    // Non negative index check
+    if (get_index < 0){
+        fprintf(stderr, "Index cannot be negative: %d\n", get_index);
+        return false;
+    }
+
     for (int idx = 0; idx < get_index; idx++){
         head_ptr = head_ptr->next;
         if (head_ptr == NULL){
@@ -130,6 +142,7 @@ int main(){
     printf("index 2: %d\n", get_by_index(head_ptr, 2));
     printf("index 4: %d\n", get_by_index(head_ptr, 4));
     printf("index 5: %d\n", get_by_index(head_ptr, 5)); // index out of bound
+    printf("index -1: %d\n", get_by_index(head_ptr, -1)); // index cannot be negative
 
     int value_at_4;
     if (get_by_index_safe(head_ptr, 4, &value_at_4)){
@@ -140,6 +153,12 @@ int main(){
     if (get_by_index_safe(head_ptr, 5, &value_at_5)){
         // will not be executed
         printf("safe get index 5: %d\n", value_at_5);
+    }
+    
+    int value_at_minus1;
+    if (get_by_index_safe(head_ptr, -1, &value_at_minus1)){
+        // will not be executed
+        printf("safe get index -1: %d\n", value_at_minus1);
     }
 
     free_list(head_ptr);
