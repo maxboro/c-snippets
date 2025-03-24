@@ -35,6 +35,7 @@ void append(struct Node* head_ptr, int value){
     struct Node* node_ptr = malloc(sizeof(struct Node));
     if (node_ptr == NULL) { //check if malloc succeeded
         fprintf(stderr, "New node memory allocation failed\n");
+        return;
     }
     node_ptr->data = value;
     node_ptr->next = NULL;
@@ -46,30 +47,40 @@ void append(struct Node* head_ptr, int value){
         }
         head_ptr = head_ptr->next;
     }
-    
+}
+
+void free_list(struct Node* head_ptr){
+    while(head_ptr != NULL){
+        struct Node* node_to_free = head_ptr;
+        head_ptr = head_ptr->next;
+        free(node_to_free);
+    }
 }
 
 int main()
 {
-    struct Node head;
-    head.data = 11;
+    struct Node* head_ptr = malloc(sizeof(struct Node));
+    head_ptr->data = 11;
+    head_ptr->next = NULL;
     
-    struct Node el1;
-    head.next = &el1;
-    el1.data = 12;
+    struct Node* el1 = malloc(sizeof(struct Node));
+    head_ptr->next = el1;
+    el1->data = 12;
     
-    struct Node el2;
-    el1.next = &el2;
-    el2.data = 13;
-    el2.next = NULL;
+    struct Node* el2 = malloc(sizeof(struct Node));
+    el1->next = el2;
+    el2->data = 13;
+    el2->next = NULL;
     
-    print_list(&head);
-    printf("Length: %d\n", len(&head));
+    print_list(head_ptr);
+    printf("Length: %d\n", len(head_ptr));
     
-    append(&head, 14);
-    append(&head, 15);
-    printf("Length after appends: %d\n", len(&head));
-    print_list(&head);
+    append(head_ptr, 14);
+    append(head_ptr, 15);
+    printf("Length after appends: %d\n", len(head_ptr));
+    print_list(head_ptr);
+
+    free_list(head_ptr);
 
     return 0;
 }
