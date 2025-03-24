@@ -68,12 +68,26 @@ int get_by_index(const struct Node* head_ptr, int get_index){
     for (int idx = 0; idx < get_index; idx++){
         head_ptr = head_ptr->next;
         if (head_ptr == NULL){
-            fprintf(stderr, "Index out of bound: ");
+            fprintf(stderr, "Index out of bound: %d\n", get_index);
             return 0;
         }
     }
     int value = head_ptr->data;
     return value;
+}
+
+// Get value by index - bound safe version
+bool get_by_index_safe(const struct Node* head_ptr, int get_index, int* value){
+    for (int idx = 0; idx < get_index; idx++){
+        head_ptr = head_ptr->next;
+        if (head_ptr == NULL){
+            fprintf(stderr, "Index out of bound: %d\n", get_index);
+            return false;
+        }
+    }
+
+    *value = head_ptr->data;
+    return true;
 }
 
 int main(){
@@ -116,6 +130,17 @@ int main(){
     printf("index 2: %d\n", get_by_index(head_ptr, 2));
     printf("index 4: %d\n", get_by_index(head_ptr, 4));
     printf("index 5: %d\n", get_by_index(head_ptr, 5)); // index out of bound
+
+    int value_at_4;
+    if (get_by_index_safe(head_ptr, 4, &value_at_4)){
+        printf("safe get index 4: %d\n", value_at_4);
+    }
+
+    int value_at_5;
+    if (get_by_index_safe(head_ptr, 5, &value_at_5)){
+        // will not be executed
+        printf("safe get index 5: %d\n", value_at_5);
+    }
 
     free_list(head_ptr);
 
