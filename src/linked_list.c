@@ -54,12 +54,26 @@ void append(struct Node* head_ptr, int value){
     }
 }
 
+// clean up the memory allocated on heap
 void free_list(struct Node* head_ptr){
     while(head_ptr != NULL){
         struct Node* node_to_free = head_ptr;
         head_ptr = head_ptr->next;
         free(node_to_free);
     }
+}
+
+// Get value by index
+int get_by_index(const struct Node* head_ptr, int get_index){
+    for (int idx = 0; idx < get_index; idx++){
+        head_ptr = head_ptr->next;
+        if (head_ptr == NULL){
+            fprintf(stderr, "Index out of bound: ");
+            return 0;
+        }
+    }
+    int value = head_ptr->data;
+    return value;
 }
 
 int main(){
@@ -96,6 +110,12 @@ int main(){
     append(head_ptr, 15);
     printf("Length after appends: %d\n", len(head_ptr));
     print_list(head_ptr);
+
+    printf("index 0: %d\n", get_by_index(head_ptr, 0));
+    printf("index 1: %d\n", get_by_index(head_ptr, 1));
+    printf("index 2: %d\n", get_by_index(head_ptr, 2));
+    printf("index 4: %d\n", get_by_index(head_ptr, 4));
+    printf("index 5: %d\n", get_by_index(head_ptr, 5)); // index out of bound
 
     free_list(head_ptr);
 
