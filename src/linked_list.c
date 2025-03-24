@@ -18,7 +18,17 @@ void print_list(struct Node* head_ptr){
              printf("; ");
         }
     }
-    printf("]");
+    printf("]\n");
+}
+
+// calculate len of linked list
+int len(struct Node* head_ptr){
+    int length = 0;
+    while(head_ptr != NULL){
+        head_ptr = head_ptr->next;
+        length++;
+    }
+    return length;
 }
 
 int main()
@@ -36,6 +46,7 @@ int main()
     el2.next = NULL;
     
     print_list(&head);
+    printf("Length: %d", len(&head));
 
     return 0;
 }
