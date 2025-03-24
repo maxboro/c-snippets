@@ -31,6 +31,24 @@ int len(struct Node* head_ptr){
     return length;
 }
 
+void append(struct Node* head_ptr, int value){
+    struct Node* node_ptr = malloc(sizeof(struct Node));
+    if (node_ptr == NULL) { //check if malloc succeeded
+        fprintf(stderr, "New node memory allocation failed\n");
+    }
+    node_ptr->data = value;
+    node_ptr->next = NULL;
+    
+    while(true){
+        if (head_ptr->next == NULL){
+            head_ptr->next = node_ptr;
+            break;
+        }
+        head_ptr = head_ptr->next;
+    }
+    
+}
+
 int main()
 {
     struct Node head;
@@ -46,7 +64,12 @@ int main()
     el2.next = NULL;
     
     print_list(&head);
-    printf("Length: %d", len(&head));
+    printf("Length: %d\n", len(&head));
+    
+    append(&head, 14);
+    append(&head, 15);
+    printf("Length after appends: %d\n", len(&head));
+    print_list(&head);
 
     return 0;
 }
