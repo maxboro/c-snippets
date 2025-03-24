@@ -59,14 +59,26 @@ void free_list(struct Node* head_ptr){
 
 int main(){
     struct Node* head_ptr = malloc(sizeof(struct Node));
+    if (!head_ptr) {
+        fprintf(stderr, "Failed to allocate head\n");
+        return 1;
+    }
     head_ptr->data = 11;
     head_ptr->next = NULL;
     
     struct Node* el1 = malloc(sizeof(struct Node));
+    if (!el1) {
+        fprintf(stderr, "Failed to allocate el1\n");
+        return 1;
+    }
     head_ptr->next = el1;
     el1->data = 12;
     
     struct Node* el2 = malloc(sizeof(struct Node));
+    if (!el2) {
+        fprintf(stderr, "Failed to allocate el2\n");
+        return 1;
+    }
     el1->next = el2;
     el2->data = 13;
     el2->next = NULL;
