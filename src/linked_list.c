@@ -9,7 +9,7 @@ struct Node {
 };
 
 // print list in format "[1; 2; 3]""
-void print_list(struct Node* head_ptr){
+void print_list(const struct Node* head_ptr){
     printf("[");
     while(head_ptr != NULL){
         printf("%d", head_ptr->data);
@@ -22,7 +22,7 @@ void print_list(struct Node* head_ptr){
 }
 
 // calculate len of linked list
-int len(struct Node* head_ptr){
+int len(const struct Node* head_ptr){
     int length = 0;
     while(head_ptr != NULL){
         head_ptr = head_ptr->next;
@@ -57,8 +57,7 @@ void free_list(struct Node* head_ptr){
     }
 }
 
-int main()
-{
+int main(){
     struct Node* head_ptr = malloc(sizeof(struct Node));
     head_ptr->data = 11;
     head_ptr->next = NULL;
