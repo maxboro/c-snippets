@@ -32,6 +32,11 @@ int len(const struct Node* head_ptr){
 }
 
 void append(struct Node* head_ptr, int value){
+    if (head_ptr == NULL){
+        fprintf(stderr, "Cannot append to NULL node\n");
+        return;
+    }
+
     struct Node* node_ptr = malloc(sizeof(struct Node));
     if (node_ptr == NULL) { //check if malloc succeeded
         fprintf(stderr, "New node memory allocation failed\n");
@@ -66,6 +71,7 @@ int main(){
     head_ptr->data = 11;
     head_ptr->next = NULL;
     
+    // Manual approach for simplicity
     struct Node* el1 = malloc(sizeof(struct Node));
     if (!el1) {
         fprintf(stderr, "Failed to allocate el1\n");
