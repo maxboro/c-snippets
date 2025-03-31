@@ -17,6 +17,7 @@ void append(struct DynArrayInt* arr_ptr, int element){
     int* new_head_ptr = (int*)realloc(arr_ptr->head_ptr, new_n_elements * sizeof(int));
     if (new_head_ptr == NULL){
         fprintf(stderr, "Memory weren't (re)allocated successfully\n");
+        return;
     }
     *(new_head_ptr + new_n_elements - 1) = element;
     printf("Element added at %p\n", new_head_ptr + new_n_elements - 1);
