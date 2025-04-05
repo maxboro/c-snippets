@@ -1,3 +1,4 @@
+// Simple binary tree implementation
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
