@@ -50,12 +50,9 @@ void show_parents_chain(struct Node* node_ptr){
         return;
     }
 
-    while (true){
+    while (node_ptr != NULL){
         printf("Node with id %d\n", node_ptr->id);
         node_ptr = node_ptr->parent_ptr;
-        if (node_ptr == NULL){
-            break;
-        }
     }
     printf("\n");
 }
